@@ -28,7 +28,7 @@ def conv2d_maxpool(x_tensor, conv_num_outputs, conv_ksize, conv_strides, pool_ks
 
 
 
-def encoding_conv_net(x):
+def encoding_conv_net(inputs):
     """
     A convolutional neural network model
     : x: Placeholder tensor that holds image data.
@@ -51,7 +51,7 @@ def encoding_conv_net(x):
 
 
 
-def conv2d_upscale(encoded_tensor, conv_num_outputs, conv_ksize, conv_strides, pool_ksize, pool_strides, padding):
+def conv2d_upscale(deconv_tensor, conv_num_outputs, conv_ksize, conv_strides, pool_ksize, pool_strides, padding):
     """
     Apply convolution then max pooling to x_tensor
     :param x_tensor: TensorFlow Tensor
@@ -68,16 +68,16 @@ def conv2d_upscale(encoded_tensor, conv_num_outputs, conv_ksize, conv_strides, p
     upsample = tf.image.resize_nearest_neighbor(encoded_tensor, (4,4)) # 4x4x4 
     weight = tf.Variable(tf.random_normal([conv_ksize[0], conv_ksize[1], feature_map, conv_num_outputs], mean=0.0, stddev=0.1))
     bias = tf.Variable(tf.zeros([conv_num_outputs]))
-    conv_layer = tf.nn.conv2d(upsample, weight, strides=[1, conv_strides[0], conv_strides[1], 1], padding=padding)
-    conv_layer = tf.nn.bias_add(conv_layer, bias)
-    conv_layer = tf.nn.relu(conv_layer)
-    upsample2 = tf.image.resize_nearest_neighbor(conv_layer, depth, ksize=[1, pool_ksize[0], pool_ksize[1], 1])  
+    deconv_layer = tf.nn.conv2d(upsample, weight, strides=[1, conv_strides[0], conv_strides[1], 1], padding=padding)
+    deconv_layer = tf.nn.bias_add(deconv_layer, bias)
+    deconv_layer = tf.nn.relu(deconv_layer)
+    upsample2 = tf.image.resize_nearest_neighbor(deconv_layer, depth, ksize=[1, pool_ksize[0], pool_ksize[1], 1])  
                                             
-    return conv_layer
+    return deconv_layer
 
 
 
-def decoding_conv_net(x):
+def decoding_conv_net(encoded_tensor):
     """
     A convolutional neural network model
     : x: Placeholder tensor that holds image data.
