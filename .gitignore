@@ -9,5 +9,6 @@ Thumbs.db
 .ipynb_checkpoints
 __pycache__/*
 data/*
+data-fashion/*
 
 
