@@ -1,6 +1,7 @@
 # Autoencoders
 
-A simple and a convolutional autoencoder to compress the MNIST dataset. Autoencoders are a type of neural network architecture to perform data compression where the compression and decompression functions are learned from the data itself. Encoder and decoder are both neural networks. Even though autoencoders are not really better than the hand-engineering compression methods in compression, they are really good for image denoising and dimensionality reduction. 
+
+An autoencoder is a neural network that is trained to attempt to copy its input to its output. Internally, it has a hidden layer h that describes a code used to represent the input. You can learn more [here](http://www.deeplearningbook.org/contents/autoencoders.html). In this case, we build a simple model and a convolutional one, to compress the MNIST dataset. Autoencoders are a type of neural network architecture to perform data compression where the compression and decompression functions are learned from the data itself. Encoder and decoder are both neural networks. Even though autoencoders are not really better than the hand-engineering compression methods in compression, they are really good for image denoising and dimensionality reduction. 
 
 All these experiments are built with TensorFlow. Udacity's original repo can be found [here](http://github.com/deep-learning/autoencoder/). Initially the exercise proposed was a [simple autoencoder](Simple_Autoencoder.ipynb)using FF neural network, and [convolutional autoencoder](Convolutional_Autoencoder_MNIST.ipynb). The idea of the third notebook, another [convolutional autoencoder](Convolutional_Autoencoder_fashionMNIST.ipynb), was to learn how to train this kind of architecture in a bit more complicated dataset -compared to MNIST- like [Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist), a dataset created and maintained by Zalando. 
 
@@ -38,4 +39,4 @@ floyd run --gpu --env tensorflow-1.2 --message 'Update README' --data floydhub/d
 
 Often you'll be writing data out, things like TensorFlow checkpoints, updated notebooks, trained models and HDF5 files. You will find all these files, you can get links to the data with:
 
-> floyd output run_ID
+> floyd output run_ID	
